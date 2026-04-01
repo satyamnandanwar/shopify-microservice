@@ -4,10 +4,12 @@ import com.productservice.dto.CategoryDto;
 import com.productservice.entity.Category;
 import com.productservice.mapper.CategoryMapper;
 import com.productservice.repository.CategoryRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryRepository categoryRepository;
