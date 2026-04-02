@@ -26,7 +26,7 @@ public class ProductController {
         ApiResponse<List<CategoryDto>> response = new ApiResponse<>();
         if(categoriesDto!=null){
             response.setData(categoriesDto);
-            response.setMessage("Categories fetched successfully");
+            response.setMessage("All Categories fetched successfully");
             response.setStatus(200);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
