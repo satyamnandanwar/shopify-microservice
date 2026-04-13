@@ -10,11 +10,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query(value = """
-        SELECT
-            p.id AS productId,
-            p.name AS productName,
-            sc.name AS subCategoryName,
-            b.name AS brandName
+        SELECT p.*
         FROM products p
         INNER JOIN sub_category sc ON sc.id = p.sub_category_id
         INNER JOIN brand b ON b.product_id = p.id
@@ -22,5 +18,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
            OR LOWER(b.name) LIKE LOWER(CONCAT('%', :keyword, '%'))
         ORDER BY p.id
         """, nativeQuery = true)
-    List<Object[]> searchProducts(@Param("keyword") String keyword);
+    List<Product> searchProducts(@Param("keyword") String keyword);
 }
