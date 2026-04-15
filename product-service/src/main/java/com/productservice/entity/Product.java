@@ -1,5 +1,7 @@
 package com.productservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -14,10 +16,12 @@ public class Product {
     private Integer id;
     private String name;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "sub_category_id")
     private SubCategory subCategory;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Brand> brands = new LinkedHashSet<>();
 

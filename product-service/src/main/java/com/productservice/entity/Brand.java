@@ -1,5 +1,7 @@
 package com.productservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -17,13 +19,16 @@ public class Brand {
     private String name;
     private BigDecimal price;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Size> sizes = new LinkedHashSet<>();
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Image> images = new LinkedHashSet<>();
 

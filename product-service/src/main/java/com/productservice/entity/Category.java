@@ -1,5 +1,6 @@
 package com.productservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -14,6 +15,7 @@ public class Category {
     private Integer id;
     private String name;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<SubCategory> subCategories = new LinkedHashSet<>();
 

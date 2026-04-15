@@ -1,5 +1,6 @@
 package com.productservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,7 @@ public class Size {
     private String size;
     private String quantity;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;

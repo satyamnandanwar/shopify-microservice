@@ -1,5 +1,6 @@
 package com.productservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,7 @@ public class Image {
     @Column(name = "url", length = 2000)
     private String url;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
