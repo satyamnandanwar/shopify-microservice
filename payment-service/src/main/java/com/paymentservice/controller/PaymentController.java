@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/payment")
@@ -30,12 +31,18 @@ public class PaymentController {
     }
 
     @GetMapping("/success")
-    public ResponseEntity<String> success(@RequestParam Long orderId) {
+    public ResponseEntity<Map<String, Object>> success(@RequestParam Long orderId) {
 
         // 🔥 UPDATE ORDER STATUS
         paymentService.markOrderPaid(orderId);
 
-        return ResponseEntity.ok("Payment successful! Order #" + orderId + " confirmed.");
+        return ResponseEntity.ok(
+                Map.of(
+                        "message", "Payment successful",
+                        "orderId", orderId,
+                        "status", "PAID"
+                )
+        );
     }
 
     @GetMapping("/cancel")

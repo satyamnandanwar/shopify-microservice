@@ -33,6 +33,11 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    public Order getOrderById(Long orderId) {
+        return orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found: " + orderId));
+    }
+
     @Transactional
     public Order createOrder(String uuid) {
 

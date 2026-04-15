@@ -25,6 +25,18 @@ public class OrderController {
         orderService.updateOrderStatus(orderId, status);
     }
 
+    @GetMapping("/{orderId}")
+    public ResponseEntity<Map<String, Object>> getOrder(@PathVariable Long orderId) {
+        Order order = orderService.getOrderById(orderId);
+        return ResponseEntity.ok(
+                Map.of(
+                        "id",          order.getId(),
+                        "totalAmount", order.getTotalAmount(),
+                        "status",      order.getStatus()
+                )
+        );
+    }
+
     @PostMapping("/place")
     public ResponseEntity<Map<String, Object>> placeOrder(
             @RequestHeader("X-CART-ID") String uuid

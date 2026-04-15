@@ -3,6 +3,8 @@ package com.paymentservice.client;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @FeignClient(name = "order-service", url = "http://localhost:8084")
 public interface OrderClient {
 
@@ -11,4 +13,7 @@ public interface OrderClient {
             @PathVariable Long orderId,
             @RequestParam String status
     );
+
+    @GetMapping("/api/v1/order/{orderId}")
+    Map<String, Object> getOrder(@PathVariable("orderId") Long orderId);
 }
