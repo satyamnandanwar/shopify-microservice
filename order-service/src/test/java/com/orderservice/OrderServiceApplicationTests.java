@@ -1,7 +1,7 @@
 package com.orderservice;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.REMOVED.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class OrderServiceApplicationTests {
@@ -9,5 +9,4 @@ class OrderServiceApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }
