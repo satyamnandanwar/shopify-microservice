@@ -7,10 +7,8 @@ import com.productservice.service.CategoryService;
 import com.productservice.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -62,6 +60,34 @@ public class ProductController {
         response.setStatus(500);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 
+    }
+
+//    @GetMapping("/test")
+//    public String test(
+//            @RequestHeader(value = "X-User-Id", required = false) String userId,
+//            @RequestHeader(value = "X-User-Role", required = false) String role
+//    ) {
+//        if (userId == null) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+//        }
+//
+//        return "User: " + userId + " Role: " + role;
+//    }
+    @GetMapping("/test")
+    public String test(
+            @RequestHeader(value = "X-Internal-Secret", required = false) String secret,
+            @RequestHeader(value = "X-User-Id", required = false) String userId,
+            @RequestHeader(value = "X-User-Role", required = false) String role
+    ) {
+        if (!"gateway-secret".equals(secret)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid source");
+        }
+
+        if (userId == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+        }
+
+        return "User: " + userId + " Role: " + role;
     }
 }
 
