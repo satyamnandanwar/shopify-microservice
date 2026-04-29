@@ -1,7 +1,7 @@
 package com.productservice;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.REMOVED.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class ProductServiceApplicationTests {
